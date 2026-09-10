@@ -1,0 +1,256 @@
+/* ================================================================
+   OORJA SYNC — Premium Dark Dashboard Design System
+   Inspired by reference: near-black navy + indigo accent + crisp type
+   ================================================================ */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* ── Backgrounds (near-black with subtle blue-navy tint) ── */
+  --bg-primary:       #0B0C14;   /* almost black, slight blue hint           */
+  --bg-secondary:     #10111E;   /* darker card surface                      */
+  --bg-surface:       rgba(16, 17, 30, 0.96);
+  --bg-card:          rgba(18, 19, 34, 0.88);
+  --bg-glass:         rgba(255, 255, 255, 0.04);
+  --bg-glass-hover:   rgba(255, 255, 255, 0.07);
+
+  /* ── Brand / accents (indigo-purple-blue, matches reference) ── */
+  --color-primary:     #6366F1;    /* indigo — main accent                   */
+  --color-primary-dim: rgba(99, 102, 241, 0.16);
+  --color-secondary:   #3B82F6;    /* blue — secondary                       */
+  --color-solar:       #F59E0B;    /* amber — solar / energy                 */
+  --color-accent:      #8B5CF6;    /* violet — highlights                    */
+  --color-grid:        #38BDF8;    /* sky — grid / IoT                       */
+  --color-critical:    #EF4444;    /* red — alerts                           */
+  --color-warning:     #F59E0B;    /* amber — warnings                       */
+  --color-saffron:     #F97316;    /* orange — SIH badge                     */
+  --color-success:     #10B981;    /* emerald — positive / online            */
+  --color-gold:        #C8A84B;    /* gold accent                            */
+
+  /* ── Text (blue-white hierarchy, high contrast on dark bg) ── */
+  --text-primary:   #F0F2FF;   /* slightly blue-tinted white                 */
+  --text-secondary: #8B8FA8;   /* medium slate-blue, clearly readable        */
+  --text-muted:     #4A4E6B;   /* subtle, still legible at normal sizes      */
+
+  /* ── Borders & glass (very subtle indigo tint) ── */
+  --glass-border:       rgba(99, 102, 241, 0.12);
+  --glass-border-hover: rgba(99, 102, 241, 0.25);
+  --glass-blur:         blur(18px);
+  --glass-shadow:       0 4px 28px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255,255,255,0.04);
+  --card-shadow:        0 2px 12px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(99,102,241,0.08);
+
+  /* ── Motion ── */
+  --dur-micro:   100ms;
+  --dur-normal:  220ms;
+  --dur-large:   400ms;
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ── Reset ────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', 'Manrope', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+#root { min-height: 100vh; background: var(--bg-primary); }
+
+body::-webkit-scrollbar { width: 4px; }
+body::-webkit-scrollbar-track { background: var(--bg-secondary); }
+body::-webkit-scrollbar-thumb { background: rgba(99,102,241,0.25); border-radius: 2px; }
+
+/* ── Typography hierarchy ──────────────────────── */
+h1, h2, h3, h4, h5 {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  color: var(--text-primary);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+h1 { font-weight: 800; font-size: clamp(1.8rem, 4vw, 3.2rem); }
+h2 { font-weight: 700; font-size: clamp(1.25rem, 2.5vw, 1.9rem); }
+h3 { font-weight: 600; font-size: clamp(1rem, 1.8vw, 1.35rem); }
+h4 { font-weight: 600; font-size: 1rem; }
+
+p {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  max-width: 68ch;
+}
+
+small, .small { font-size: 0.8rem; color: var(--text-secondary); }
+strong { font-weight: 600; color: var(--text-primary); }
+
+/* ── Glass surfaces ────────────────────────────── */
+.glass {
+  background: var(--bg-card);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+.glass-hover {
+  transition:
+    border-color var(--dur-normal) var(--ease-smooth),
+    background   var(--dur-normal) var(--ease-smooth),
+    transform    var(--dur-normal) var(--ease-smooth),
+    box-shadow   var(--dur-normal) var(--ease-smooth);
+}
+.glass-hover:hover {
+  background: rgba(20, 21, 38, 0.92);
+  border-color: var(--glass-border-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 36px rgba(0,0,0,0.5), 0 0 0 1px rgba(99,102,241,0.18),
+              inset 0 1px 0 rgba(255,255,255,0.05);
+}
+
+/* ── Soft accent shadows ───────────────────────── */
+.glow-primary   { box-shadow: 0 0 0 1px rgba(99,102,241,0.2), 0 4px 20px rgba(99,102,241,0.1); }
+.glow-solar     { box-shadow: 0 0 0 1px rgba(245,158,11,0.2), 0 4px 20px rgba(245,158,11,0.1); }
+.glow-secondary { box-shadow: 0 0 0 1px rgba(59,130,246,0.2), 0 4px 20px rgba(59,130,246,0.1); }
+
+/* ── Animations ────────────────────────────────── */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-5px); }
+}
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+@keyframes energy-pulse {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 0.75; }
+}
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ── Gradient backgrounds (subtle, reference-inspired) ── */
+.bg-gradient-indigo {
+  background: radial-gradient(ellipse at 20% 50%, rgba(99,102,241,0.08) 0%, transparent 60%),
+              radial-gradient(ellipse at 80% 20%, rgba(139,92,246,0.06) 0%, transparent 50%),
+              var(--bg-primary);
+}
+
+/* ── Grid overlay ──────────────────────────────── */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(99,102,241,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99,102,241,0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* ── Type utilities ────────────────────────────── */
+.font-display { font-family: 'Space Grotesk', sans-serif; }
+.font-body    { font-family: 'Manrope', sans-serif; }
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.text-gradient-solar {
+  background: linear-gradient(135deg, var(--color-solar) 0%, #F97316 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.text-gradient-blue {
+  background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-grid) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+
+/* ── Buttons ───────────────────────────────────── */
+.btn-primary {
+  background: linear-gradient(135deg, rgba(99,102,241,0.18), rgba(139,92,246,0.18));
+  border: 1px solid rgba(99,102,241,0.45);
+  color: #A5B4FC;   /* light indigo — clearly readable */
+  padding: 10px 24px; border-radius: 8px;
+  font-weight: 600; font-size: 0.875rem; cursor: pointer;
+  transition: all var(--dur-normal) var(--ease-smooth);
+}
+.btn-primary:hover {
+  background: linear-gradient(135deg, rgba(99,102,241,0.28), rgba(139,92,246,0.28));
+  box-shadow: 0 4px 18px rgba(99,102,241,0.2);
+  transform: translateY(-1px);
+}
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  color: var(--text-secondary);
+  padding: 10px 24px; border-radius: 8px;
+  font-weight: 500; font-size: 0.875rem; cursor: pointer;
+  transition: all var(--dur-normal) var(--ease-smooth);
+}
+.btn-secondary:hover {
+  border-color: var(--glass-border-hover);
+  color: var(--text-primary);
+  transform: translateY(-1px);
+}
+
+/* ── Live indicator ────────────────────────────── */
+.live-indicator {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(16,185,129,0.08);
+  border: 1px solid rgba(16,185,129,0.2);
+  border-radius: 20px; padding: 3px 10px;
+  font-size: 0.68rem; font-weight: 600;
+  color: var(--color-success); letter-spacing: 0.08em;
+}
+.live-indicator .dot {
+  width: 5px; height: 5px;
+  background: var(--color-success); border-radius: 50%;
+  animation: pulse-dot 1.8s ease-in-out infinite;
+}
+
+/* ── Status badge ──────────────────────────────── */
+.status-demo {
+  background: rgba(245,158,11,0.1);
+  border: 1px solid rgba(245,158,11,0.25);
+  color: var(--color-solar);
+  padding: 2px 8px; border-radius: 4px;
+  font-size: 0.7rem; font-weight: 600; letter-spacing: 0.05em;
+}
+
+/* ── Scrollbar ─────────────────────────────────── */
+.styled-scroll::-webkit-scrollbar { width: 3px; height: 3px; }
+.styled-scroll::-webkit-scrollbar-track { background: transparent; }
+.styled-scroll::-webkit-scrollbar-thumb { background: rgba(99,102,241,0.2); border-radius: 2px; }
+
+/* ── Fade-in utility ───────────────────────────── */
+.animate-fade-in-up { animation: fade-in-up 0.35s var(--ease-smooth) both; }
+
+/* ── Confidence / progress bars ────────────────── */
+.progress-bar-track {
+  height: 3px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+  border-radius: 2px;
+  transition: width 0.5s var(--ease-smooth);
+}
+
+/* ── Reduced motion ─────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

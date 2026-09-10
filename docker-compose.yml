@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: oorjasync
+      POSTGRES_USER: oorjasync
+      POSTGRES_PASSWORD: oorjasync123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U oorjasync"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  ml-service:
+    build: ./ml-service
+    ports:
+      - "8001:8001"
+    environment:
+      - PYTHONUNBUFFERED=1
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  backend:
+    build: ./backend
+    ports:
+      - "8080:8080"
+    environment:
+      - DATABASE_URL=jdbc:postgresql://postgres:5432/oorjasync
+      - DATABASE_USERNAME=oorjasync
+      - DATABASE_PASSWORD=oorjasync123
+      - ML_SERVICE_URL=http://ml-service:8001
+      - JWT_SECRET=oorjasync-dev-secret-2026
+    depends_on:
+      postgres:
+        condition: service_healthy
+      ml-service:
+        condition: service_started
+
+volumes:
+  postgres_data:

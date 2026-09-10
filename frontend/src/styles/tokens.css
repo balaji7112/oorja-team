@@ -1,0 +1,32 @@
+:root {
+  /* Backgrounds */
+  --bg-primary: #07110F;
+  --bg-secondary: #0B1715;
+  --bg-surface: rgba(11, 23, 21, 0.8);
+  --bg-glass: rgba(32, 214, 123, 0.05);
+  
+  /* Brand colors */
+  --color-primary: #20D67B;
+  --color-secondary: #27D7D0;
+  --color-solar: #FFB84D;
+  --color-accent: #FF8A3D;
+  --color-grid: #4A9EE0;
+  --color-critical: #FF4D4D;
+  --color-warning: #FFB84D;
+  
+  /* Text */
+  --text-primary: #F4FAF7;
+  --text-secondary: #91AAA2;
+  --text-muted: #4A6860;
+  
+  /* Glass effects */
+  --glass-border: rgba(32, 214, 123, 0.15);
+  --glass-blur: blur(20px);
+  
+  /* Motion */
+  --duration-micro: 150ms;
+  --duration-normal: 300ms;
+  --duration-large: 600ms;
+  --duration-cinematic: 1500ms;
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+}
